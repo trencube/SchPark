@@ -1,0 +1,237 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8"/>
+<title>SchPark</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="" name="description"/>
+<meta content="" name="author"/>
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css"/>
+<!-- END GLOBAL MANDATORY STYLES -->
+
+<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+
+<!-- END PAGE STYLES -->
+
+<!-- BEGIN THEME STYLES -->
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/admin/layout2/css/layout.css" rel="stylesheet" type="text/css"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/admin/layout2/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="{{ STATIC_URL }}/core/Metronic/assets/admin/layout2/css/custom.css" rel="stylesheet" type="text/css"/>
+<!-- END THEME STYLES -->
+
+<link rel="shortcut icon" href="favicon.ico"/>
+
+<!-- BEGIN NEEDED SCRIPTS IN HEADER -->
+
+{% block header_css %}
+
+{% endblock %}
+
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+
+{% block header_scripts %}
+
+{% endblock %}
+
+<!-- END NEEDED SCRIPTS IN HEADER -->
+
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo">
+
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<a href="/">
+			<h3 class="logo-default" style="color: white;">SchPark</h3>
+			</a>
+			<div class="menu-toggler sidebar-toggler">
+				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+			</div>
+		</div>
+		<!-- END LOGO -->
+
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+
+		<!-- BEGIN PAGE TOP -->
+		<div class="page-top">
+			<!-- BEGIN TOP NAVIGATION MENU -->
+			<div class="top-menu">
+				<ul class="nav navbar-nav pull-right">
+					<!-- BEGIN QUICK SIDEBAR TOGGLER -->
+					<li class="dropdown dropdown-quick-sidebar-toggler hide">
+						<a href="javascript:;" class="dropdown-toggle">
+						<i class="icon-logout"></i>
+						</a>
+					</li>
+					<!-- END QUICK SIDEBAR TOGGLER -->
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown dropdown-user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+						<img alt="" class="img-circle hide1" src="{{ STATIC_URL }}/core/Metronic/assets/admin/layout/img/avatar.png"/>
+						<span class="username username-hide-on-mobile">
+						{{ user.get_username }} </span>
+						<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/logout">
+								<i class="icon-key"></i>{% trans "Log out" %}</a>
+							</li>
+						</ul>
+					</li>
+					<!-- END USER LOGIN DROPDOWN -->
+				</ul>
+			</div>
+			<!-- END TOP NAVIGATION MENU -->
+		</div>
+		<!-- END PAGE TOP -->
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+
+<div class="clearfix">
+</div>
+
+<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN SIDEBAR -->
+		<div class="page-sidebar-wrapper">
+			<div class="page-sidebar navbar-collapse collapse">
+				<!-- BEGIN SIDEBAR MENU -->
+				<ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-auto-scroll="true" data-slide-speed="200">
+					<li id="menu_dashboard">
+            <a href="/">
+            <i class="icon-home"></i>
+            <span class="title">{% trans 'Dashboard' %}</span>
+            </a>
+          </li>
+					<li id="menu_spark_console">
+	          <a href="/spark_console">
+	          <i class="icon-control-play"></i>
+	          <span class="title">{% trans 'Spark Console' %}</span>
+	          </a>
+          </li>
+					<li id="menu_scheduler">
+      			<a href="javascript:;">
+      			<i class="icon-speedometer"></i>
+      			<span class="title">{% trans 'Scheduler' %}</span>
+      			</a>
+      			<ul class="sub-menu">
+        				<li id='menu_scheduler_jobs'>
+          					<a href="/jobs/">{% trans 'Jobs' %}</a>
+        				</li>
+        				<li id='menu_scheduler_new_job'>
+          					<a href="/new_job">{% trans 'New Job' %} </a>
+        				</li>
+      			</ul>
+    			</li>
+				</ul>
+				<!-- END SIDEBAR MENU -->
+			</div>
+		</div>
+		<!-- END SIDEBAR -->
+
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+
+				{% block content_header %}
+				{% endblock %}
+
+				{% block content %}
+            			{% endblock %}
+
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+<!-- END CONTAINER -->
+
+<!-- BEGIN JAVASCRIPTS -->
+
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/respond.min.js"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/select2/select2.min.js"></script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{ STATIC_URL }}/core/Metronic/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}/core/Metronic/assets/admin/layout2/scripts/layout.js" type="text/javascript"></script>
+
+
+{% block footer_scripts %}
+
+{% endblock %}
+
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<script>
+jQuery(document).ready(function() {
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+});
+</script>
+
+<!-- END JAVASCRIPTS -->
+
+</body>
+<!-- END BODY -->
+
+</html>

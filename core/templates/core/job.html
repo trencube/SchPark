@@ -1,0 +1,114 @@
+{% extends "core/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+
+<div class="page-bar">
+  <ul class="page-breadcrumb col-md-6 col-sm-5 col-xs-12">
+    <li>
+      <i class="icon-speedometer"></i>
+      <a href="/jobs">{% trans "Jobs" %}</a>
+    </li>
+  </ul>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box grey-cascade">
+            <div class="portlet-title">
+                <div class="caption">
+                    {% trans 'Job: ' %}<a href="/job/{{job.id}}/" style="color: #FFFFFF">{{ job.name }}</a>
+                    {% if job.active %}
+                      <span class="label label-sm label-success"> Enabled </span>
+                    {% else %}
+                    <span class="label label-sm label-danger"> Disabled </span>
+                    {% endif %}
+                </div>
+                <div class="tools">
+                  <div class="btn-group pull-right">
+                    <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" style="margin-top: -10px;">
+                    Actions <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                      <li>
+                        <a href="/job/enable_job/{{job.id}}">{% trans 'Enable job' %}</a>
+                      </li>
+                      <li>
+                        <a href="/job/disable_job/{{job.id}}">{% trans 'Disable job' %}</a>
+                      </li>
+                      <li>
+                        <a href="/job/delete_job/{{job.id}}/" onclick="return confirm('Do you want delete this job?')">{% trans 'Delete job' %}</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+
+            <div class="portlet-body form">
+              <form class="horizontal-form" enctype="multipart/form-data" action="#" method="post">
+                {% csrf_token %}
+
+                <div class="form-body">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <input type="text" name="name" id="job_name" class="form-control" autocomplete="off" value="{{ job.name }}" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <input type="text" name="name" id="job_description" class="form-control" autocomplete="off" value="{{ job.description }}" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Frequency</label>
+                        <input type="text" name="name" id="job_interval" class="form-control" autocomplete="off" value="{{ job.interval }}" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Interval options</label>
+                        <input type="text" name="name" id="job_interval_options" class="form-control" autocomplete="off" value="{{ job.interval_options }}" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">Arguments</label></br>
+                        <input type="text" name="name" id="job_arguments" class="form-control" autocomplete="off" value="{{ job.arguments }}" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">File Name</label></br>
+                        <input type="text" name="name" id="job_filename" class="form-control" autocomplete="off" value="{{ job.file_name }}" readonly>
+                      </div>
+                    </div>
+                </div>
+
+              </form>
+            </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block footer_scripts %}
+
+<script src="{{ STATIC_URL }}/core/js/job.js" type="text/javascript"></script>
+
+{% endblock %}
