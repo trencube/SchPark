@@ -1,6 +1,6 @@
 /sftp-config.json
 /static/
-/job_files/
+/job_files/*
 /SchPark/db.sqlite3
 *.pyc
 dm_*
