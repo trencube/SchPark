@@ -1,24 +1,24 @@
 from django_cron import CronJobBase, Schedule
-from models import *
+from models import Job, JobLog
 
 import datetime
 import calendar
 import subprocess
 
-from SchPark.settings import SPARK_BIN_DIR
-from SchPark.settings import BASE_DIR
+from SchPark.settings import SPARK_BIN_DIR, BASE_DIR, SPARK_MASTER
+
 
 def add_month(sourcedate):
     month = sourcedate.month - 1 + 1
     year = sourcedate.year + month / 12
     month = month % 12 + 1
-    day = min(sourcedate.day, calendar.monthrange(year,month)[1])
+    day = min(sourcedate.day, calendar.monthrange(year, month)[1])
     return datetime.datetime(year, month, day, sourcedate.hour, sourcedate.minute)
 
 
 def next_weekday(now, weekday):
     days_ahead = weekday - now.weekday()
-    if days_ahead <= 0: # Target day already happened this week
+    if days_ahead <= 0:  #Target day already happened this week
         days_ahead += 7
     return now + datetime.timedelta(days_ahead)
 
@@ -48,7 +48,7 @@ def new_next_run(job):
         if prev_run_datetime > now:
             job.next_run = prev_run_datetime
         else:
-            while prev_run_datetime<=now:
+            while prev_run_datetime <= now:
                 prev_run_datetime = add_month(prev_run_datetime)
             job.next_run = prev_run_datetime
 
@@ -100,7 +100,7 @@ def next_run(job):
     now = datetime.datetime.now()
     if job.interval == 'Y':
         last_run = job.last_run
-        job.next_run = datetime.datetime(last_run.year+1, last_run.month, last_run.day, last_run.hour, last_run.minute)
+        job.next_run = datetime.datetime(last_run.year + 1, last_run.month, last_run.day, last_run.hour, last_run.minute)
 
     elif job.interval == 'M':
         last_run = job.last_run
@@ -142,10 +142,10 @@ class SubmitJobs(CronJobBase):
         jobs = Job.objects.filter(active=True)
         for job in jobs:
             if not job.next_run:
-                 new_next_run(job)
+                new_next_run(job)
             else:
                 if job.next_run <= datetime.datetime.now():
-                    subprocess.Popen(SPARK_BIN_DIR + '/spark-submit --master spark://localhost:7077 ' + BASE_DIR + '/job_files/' + job.file_name  , shell=True)
+                    subprocess.Popen(SPARK_BIN_DIR + '/spark-submit --packages TargetHolding:pyspark-cassandra:0.1.4 --master spark://' + SPARK_MASTER + ' ' + BASE_DIR + '/job_files/' + job.file_name, shell=True)
 
                     job.last_run = job.next_run
                     job.save()
