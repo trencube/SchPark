@@ -7,12 +7,10 @@ SchPark is a Scheduler for Spark with a web interface for manage all jobs. It us
 - django-cron https://github.com/Tivix/django-cron
 - Apache Spark
 
-## 2. Installation example on Debian
+## 2. Installation
 
-    git clone https://github.com/trencube/SchPark.git
-    cd SchPark
-    sudo python manage.py collectstatic
-    sudo chown -R www-data:www-data *
+Check wiki:
+https://github.com/trencube/SchPark/wiki
 
 
 ## 3. Configuration
