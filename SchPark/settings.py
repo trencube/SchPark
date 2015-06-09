@@ -111,15 +111,6 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(CURRENT_PATH + '/..', 'static')
 
-STATICFILES_DIRS = (
-    os.path.join(CURRENT_PATH, 'static_common'),
-)
-
-STATICFILES_DIRS = (
-    os.path.join(CURRENT_PATH, 'templates_common'),
-)
-
-
 CRON_CLASSES = [
     'core.cron.SubmitJobs',
 ]
